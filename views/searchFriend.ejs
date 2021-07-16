@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <head>
+        <!--    <link rel="stylesheet" href="styleLoginPage.css">-->
+        <title>Event Traveler: Saved Trips</title>
+        <link rel="shortcut icon" type="image/jpg" href="/uploads/savedTripsPageIcons/favicon.png" />
+        <link rel="stylesheet" href="/css/clickSort.css">
+        <link rel="stylesheet" href="/css/navBarStyle.css">
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+        <!--<link rel="stylesheet" href="./style.css">-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/typeahead.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input.typeahead').typeahead({
+                name: 'typeahead',
+                remote: '/search?key=%QUERY',
+                limit: 10
+            });
+        });
+    </script>
+    <style type="text/css">
+        .bs-example {
+            font-family: sans-serif;
+            position: relative;
+            margin: 50px;
+        }
+
+        .typeahead,
+        .tt-query,
+        .tt-hint {
+            border: 2px solid #CCCCCC;
+            border-radius: 8px;
+            font-size: 24px;
+            height: 30px;
+            line-height: 30px;
+            outline: medium none;
+            padding: 8px 12px;
+            width: 396px;
+        }
+
+        .typeahead {
+            background-color: #FFFFFF;
+        }
+
+        .typeahead:focus {
+            border: 2px solid #0097CF;
+        }
+
+        .tt-query {
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        }
+
+        .tt-hint {
+            color: #999999;
+        }
+
+        .tt-dropdown-menu {
+            background-color: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 12px;
+            padding: 8px 0;
+            width: 422px;
+        }
+
+        .tt-suggestion {
+            font-size: 24px;
+            line-height: 24px;
+            padding: 3px 20px;
+        }
+
+        .tt-suggestion.tt-is-under-cursor {
+            background-color: #0097CF;
+            color: #FFFFFF;
+        }
+
+        .tt-suggestion p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul id="horizontal-bar">
+    <li> <img src="https://i.ibb.co/qDHH5bB/Logo.png" width="30px" height="30px"></li>
+    <li> <a class="active" href="home">Profile</a></li>
+    
+    <li> <a href="search-trips">Search Trips</a></li>
+    
+    <li><a href="search">Search Friends</a></li>
+    
+    <li><a href="logout">Log out</a></li>
+        </ul>
+    </nav>
+    <div class="page-header">
+        <h1>Search For Users</h1>
+    </div>
+    <div class="bs-example"  enctype="multipart/form-data">
+        <form action=/searchFriends method="post">
+        <input type="text" name="typeahead" class="typeahead tt-query" autocomplete="off" spellcheck="true"
+           value="<%typeahead%>"  >
+    
+
+  
+           
+    <button type="submit" id="demo" class="tank">Search</button>
+        
+        </form>
+    </div> 
+   <div  class="showing the list">
+     
+    <form action="/searchFriends" method="post" enctype="multipart/form-data">
+</form>
+<form action="/getFriendsList" method="post" enctype="multipart/form-data">
+ 
+
+</form>
+    <% if (data1.length==0 ){ %>
+
+    
+        </div>
+    
+    
+        <% }else{ %>
+    
+            <table cellspacing="8">
+                <tr>
+                    <th>Picture</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>UserName</th>
+                    <th>BIO</th>
+                    <th></th>
+                    
+                </tr>
+    
+                <% for (i=0; i<data1.length;++i){ %>
+                    
+                    <tr>
+                    <tr>
+                        <td><img id='image' src="/uploads/images/<%=data1[i].profilepic%>"
+                                alt="image should be here" width="150"></td>
+    
+                        <td >
+                            "<%=data1[i].firstname%>"
+                        </td>
+    
+                        <td>
+                            "<%=data1[i].lastname%>""
+                        </td>
+    
+                        <td>
+                            <%=data1[i].emailaddress%>
+                        </td>
+    
+                        <td >
+                            <%=data1[i].username%>
+                          
+                        </td>
+    
+                        <td>
+                            <%=data1[i].bio%>
+                        </td>
+                        <td >
+                            
+                            <form id="requestFriends" action="/requestFriends" method="post" enctype="multipart/form-data">
+                                
+                                <input type="hidden" name="friend_two" value="<%= data1[i].username %>">
+                                <input type="hidden" name="friend_one" value="">
+                                <button type="submit" id="demo" class="tank" value="">Add Friend</button>
+                            </form>
+                        </td>
+    
+                      
+                        <% } %>
+                            <% } %>
+                            
+    
+            </table>
+
+    
+    
+</body>
+
+</html>

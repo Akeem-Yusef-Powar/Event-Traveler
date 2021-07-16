@@ -1,0 +1,89 @@
+
+<html lang="en">
+
+<head>
+	<style>
+
+	</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>
+		Current Itinerary
+	</title>
+	<link rel="stylesheet" href="/css/itinerary.css">
+	<h1 id="topTitle">Current Itinerary</h2>
+</head>
+
+<body>
+
+
+
+
+
+
+
+	<main id="main-holder">
+		<div id="log"></div>
+		<div id="map"></div>
+
+		<!--<script src="https://maps.googleapis.com/maps/api/js"></script>-->
+		<script type="module" src="map.js"></script>
+
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL_KeBXu1O-kwmxfZStwgcPMJF-mUrLxc&callback=initAutocomplete&libraries=places&v=weekly"
+			async></script>
+		<form id="current-itinerary" action="/createTrip" method="post" enctype="multipart/form-data">
+			<p id="journal" class="current-itinerary">Trip Title</p>
+			<input id="title-enter" type='text' name="title" value='Title' id="title-field" class="current-itinerary">
+
+
+			<!-- <input id="addPhotos" type='button' value='Add Photos' id = "photo" class="current-itinerary">-->
+			<!--      <input id="viewPhotos" type='button' value='View Trip Photos' class="current-itinerary">-->
+
+			<p id="journal" class="current-itinerary">Trip start</p>
+			<input type='date' name="date" value='dateStart' id="date-field" class="current-itinerary">
+			<p id="journal" class="current-itinerary">Trip end</p>
+			<input type='date' name="date" value='dateEnd' id="date-field" class="current-itinerary">
+			<p id="score" class="current-itinerary">Trip Score</p>
+			<input type='text' name="score" value='Add score' id="score-field" class="current-itinerary">
+			<p id="price" class="current-itinerary">Trip Price</p>
+			<input type='text' name="price" value='Add Price' id="price-field" class="current-itinerary">
+			<p id="journal" class="current-itinerary">Trip Description</p>
+			<textarea type='text' name="journal" id="journal-field" class="current-itinerary" rows="4"
+				cols="50"></textarea>
+
+			<p id="events" class="current-itinerary">Event Description</p>
+			<textarea type='text' name="event" id="event-field" class="current-itinerary" rows="2" cols="20"></textarea>
+
+			<input type='button' id='beforeThis' onclick="newEvent()">
+			<!--Add Event Comment, doesn't work -->
+
+			<p id="trip" class="current-itinerary">Trip Photos</p>
+			<div id="dropzone">
+				<h3>Drop Files or Click to Upload</h3>
+				<input type="file"  name ="userPhoto" multiple>
+
+				
+				<button type="submit" class="warrior">Upload Trip</button>
+			</div>
+		</form>
+
+	</main>
+
+	<script>
+		function newEvent() {
+			console.log('doing script stuff');
+			var element = document.createElement("textarea");
+			element.setAttribute("type", "text");
+			element.setAttribute("rows", "2");
+			element.setAttribute("cols", "20");
+			document.appendChild(element);
+		}
+
+	</script>
+
+
+</body>
+
+</html>

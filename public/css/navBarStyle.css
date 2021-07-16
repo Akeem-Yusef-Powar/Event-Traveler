@@ -1,0 +1,37 @@
+
+ol,
+ul {
+    list-style: none;
+}
+
+#horizontal-bar {
+    margin: 10px;
+    width: 1100px;
+    font-family: sans-serif;
+}
+
+#horizontal-bar li {
+    display: block;
+    width: 120px;
+    float: left;
+    margin-left: -10px;
+    border-radius: 2px;
+    align-items: center;
+    text-align: center;
+}
+
+#horizontal-bar img {
+    margin-top: -13px;
+}
+
+#horizontal-bar a {
+    display: block;
+    padding: 3px;
+    text-decoration: none;
+    color: #009;
+}
+
+#horizontal-bar a:hover {
+    background-color: #009;
+    color: #fff;
+}

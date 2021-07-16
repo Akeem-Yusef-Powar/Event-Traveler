@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <!--    <link rel="stylesheet" href="styleLoginPage.css">-->
+  <title>Event Traveler: Saved Trips</title>
+  <link rel="shortcut icon" type="image/jpg" href="/uploads/savedTripsPageIcons/favicon.png" />
+  <link rel="stylesheet" href="/css/clickSort.css">
+  <link rel="stylesheet" href="/css/navBarStyle.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+  <!--<link rel="stylesheet" href="./style.css">-->
+</head>
+
+<body style="background-color: #d9dddd;">
+
+  <nav>
+    <ul id="horizontal-bar">
+      <li> <img src="/uploads/savedTripsPageIcons/Logo.png" width="40px" height="40px"></li>
+      <li> <a class="active" href="home">Home</a></li>
+    
+      <li><a href="search">Search Friends</a></li>
+      
+    </ul>
+  </nav>
+
+  <body>
+    <form id="basicSearch" action="/searchRequest" method="post" enctype="multipart/form-data">
+
+      <p id="search" class="current-itinerary">Search by destination</p>
+      <input type='text' name="search" value="<%=search%>" id="price-field" class="saved_trips">
+
+      <p id="search" class="current-itinerary">Filter by </p>
+      <input type='text' name="filter" value="<%=filter%>" id="price-field" class="saved_trips">
+
+      <p id="search" class="current-itinerary">Sorted by <%=order%>
+      </p>
+      <select name="sort" id="sort" class="saved_trips">
+        <option value="trip_score DESC">Highest Score</option>
+        <option value="trip_price DESC">Price Hight -> Low</option>
+        <option value="trip_price">Price Low -> High</option>
+        <option value="trip_start DESC">Most recent</option>
+        <option value="trip_score">Lowest Score</option>
+      </select>
+
+      <button type="submit" class="warrior">Search</button>
+    </form>
+
+
+
+    <% if (tripData.length==0 ){ %>
+      <div class="sidebar-nav" style="width:100%;right:0">
+        <h3>Nothing to Display</h3>
+        <p>
+          <%= errorMessage %>
+        </p>
+      </div>
+      <% }else{ %>
+        <table cellspacing="3">
+          <tr>
+            <th>Picture</th>
+            <th>Location</th>
+            <th>Owner</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Score</th>
+            <th>Price</th>
+            <th>journal Entries</th>
+            <th>Event discriptions</th>
+            <th>View Details</th>
+          </tr>
+          <% for (i=0; i<tripData.length;i++){ %>
+            <tr>
+            <tr>
+              <td><img id='image' src="/uploads/trips/<%=tripData[i].trip_pic%>"
+                  alt="image should be here" width="150"></td>
+              <td>
+                <%=tripData[i].trip_title%>
+              </td>
+              <td>
+                <%=tripData[i].username%>
+              </td>
+              <td>
+                <%=tripData[i].trip_start%>
+              </td>
+              <td>
+                <%=tripData[i].trip_end%>
+              </td>
+              <td>
+                <%=tripData[i].trip_score%>
+              </td>
+              <td>$<%=tripData[i].trip_price%>
+              </td>
+              <td>
+                <%=tripData[i].trip_journals%>
+              </td>
+
+              <td>
+                <%=tripData[i].trip_events%>
+              </td>
+              <form action="/trip-details" method="post">
+                <td><button type="submit" name="click" value="<%=tripData[i].tripID%>">View Details</button></td>
+              </form>
+
+              <% } %>
+                <% } %>
+
+        </table>
+
+
+
+        <script src="/js/MakeClickSortTable.js"></script>
+        <script src="/js/SortableTableUtils.js"></script>
+        <script src="/js/savedTrips.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+          document.getElementById("content").innerHTML = "";
+          var ele = savedTrips(tripData);
+          document.getElementById("content").appendChild(ele);
+          function show(value) {
+            window.location = "/trip-details"
+            console.log(value);
+          }
+     //onclick = "show(this.value)"
+    // do something with id 
+        </script>
+  </body>
+
+</html>

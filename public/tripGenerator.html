@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+body {
+	background-color: #f6f6ff;
+	font-family: Calibri, Myriad;
+	
+}
+
+#main {
+	width: 780px;
+	padding: 20px;
+	margin-right: 100%;
+}
+
+table.timecard {
+	margin: auto;
+	width: 600px;
+	border-collapse: collapse;
+	border: 1px solid #fff; /*for older IE*/
+	border-style: hidden;
+}
+
+table.timecard caption {
+	background-color: #f79646;
+	color: #fff;
+	font-size: x-large;
+	font-weight: bold;
+	letter-spacing: .3em;
+}
+
+table.timecard thead th {
+	padding: 8px;
+	background-color: #fde9d9;
+	font-size: large;
+}
+
+table.timecard thead th#thDay {
+	width: 40%;	
+}
+
+table.timecard thead th#thRegular, table.timecard thead th#thOvertime, table.timecard thead th#thTotal {
+	width: 20%;
+}
+
+table.timecard th, table.timecard td {
+	padding: 3px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #f79646 #ccc;
+}
+
+table.timecard td {
+	text-align: right;
+}
+
+table.timecard tbody th {
+	text-align: left;
+	font-weight: normal;
+}
+
+table.timecard tfoot {
+	font-weight: bold;
+	font-size: large;
+	background-color: #687886;
+	color: #fff;
+}
+
+table.timecard tr.even {
+	background-color: #fde9d9;
+
+}
+#map {
+			position:absolute;
+    width:40%;
+    height: 600px;
+   margin-top:0% ;
+    background-color: #CCC;
+    margin-left:50%;
+    };
+</style>
+<title>Employee Timecard</title>
+</head>
+
+<body>
+	<div class="map">
+		<div id="log"></div>
+		<div id="map">
+	
+	
+		</div>
+	
+		<!--<script src="https://maps.googleapis.com/maps/api/js"></script>-->
+		<script type="module" src="map.js"></script>
+	
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL_KeBXu1O-kwmxfZStwgcPMJF-mUrLxc&callback=initAutocomplete&libraries=places&v=weekly"
+			async>
+
+			</script>
+<div id="main">
+	
+<table class="timecard">
+	<caption>Trip Days</caption>
+	<thead>
+		<tr>
+			<th id="thDay">Day</th>
+			<th id="thRegular">Places Visited</th>
+		
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="odd">
+			<th>Monday</th>
+			<td>8</td>
+					</tr>
+		<tr class="even">
+			<th>Tuesday</th>
+			<td>8</td>
+			
+		</tr>
+		<tr class="odd">
+			<th>Wednesday</th>
+			<td>8</td>
+			
+		</tr>
+		<tr class="even">
+			<th>Thursday</th>
+			<td>8</td>
+			
+		</tr>
+		<tr class="odd">
+			<th>Friday</th>
+			<td>8</td>
+			
+		</tr>
+		<tr class="even">
+			<th>Saturday</th>
+			<td>0</td>
+			
+		</tr>
+		<tr class="odd">
+			<th>Sunday</th>
+			<td>0</td>
+		
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<th>Total weekly hours:</th>
+			<td>40</td>
+			
+			
+		</tr>
+	</tfoot>
+</table>
+
+<p id="trip" class="current-itinerary">Trip Photos
+<div id="dropzone">
+	<h3>Drop Files or Click to Upload</h3>
+	<input type="file" name="userPhoto" accept multiple >
+	
+
+
+	
+</div>
+</div >
+</body>
+</html>

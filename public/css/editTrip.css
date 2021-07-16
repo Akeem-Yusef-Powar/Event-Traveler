@@ -1,0 +1,45 @@
+
+
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+.column {
+ 
+    float: left;
+    width: 10%;
+    padding: 5px;
+  }
+  
+  /* Clear floats after image containers */
+  .row::after {
+    
+    content: "";
+    clear: both;
+    display: table;
+  }
+     #map {
+			position:relative;
+    width:70%;
+    height: 350px;
+
+    background-color: #CCC;
+    margin-left:30%;
+
+    }
+      #maptouse{
+		position: relative;
+    
+    width:70%;
+    height: 350px;
+ margin-bottom: -800px;
+    background-color: #CCC;
+    margin-left:30%;
+
+    }
+     #mapTitle2{
+       margin-left: 50%;
+ }
+ #mapTitle{
+   
+   margin-left: 50%;
+ }
+      
+ 

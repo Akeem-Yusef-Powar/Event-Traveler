@@ -1,0 +1,180 @@
+html {
+    height: 100%
+}
+
+body {
+    height: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    justify-items: center;
+    display: grid;
+    align-items: center;
+    background-color: ebf5f5;
+}
+
+h1 {
+    font-size: 60px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: black;
+}
+
+h2 {
+    font-size: 20px;
+    margin-top: -80px;
+    font-family: inherit;
+}
+
+hr {
+    width: 30%;
+    margin-top: -190px;
+}
+
+#login-form {
+    display: grid;
+    justify-items: center;
+}
+
+.login-form-field::placeholder {
+    color: #3a3a3a;
+}
+
+#username-field {
+    margin-top: -130px;
+    margin-bottom: 130px;
+}
+
+#password-field {
+    margin-top: -125px;
+    margin-bottom: 125px;
+}
+
+.login-form-field {
+    justify-items: center;
+    border: none;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    outline: none;
+    padding: 5px 5px 5px 5px;
+}
+
+#login-form-submit {
+    margin-bottom: 120px;
+    margin-top: -120px;
+    width: 130%;
+    padding: 9px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    background-color: #3a3a3a;
+    cursor: pointer;
+    outline: none;
+}
+
+#login-error-msg-holder {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+#login-error-msg {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #8a0000;
+    border: 1px solid #8a0000;
+    background-color: #e58f8f;
+    opacity: 0;
+}
+
+#error-msg-second-line {
+    display: block;
+}
+
+ol,
+ul {
+    height: 40px;
+    list-style: none;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.sidebar {
+    margin-top: -10px;
+    height: 55px;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+.sidebar li {
+    display: inline;
+    width: 120px;
+    float: left;
+    margin-left: 20px;
+    border-radius: 2px;
+    align-items: center;
+    text-align: center;
+}
+
+
+/* Sidebar links */
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-align: left;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
+/* Active/current link */
+
+.sidebar a.active {
+    background-color: green;
+    height: 50px;
+}
+
+
+/* Links on mouse-over */
+
+.sidebar a:hover:not(.active) {
+    background-color: #111;
+    color: #fff;
+}
+
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .sidebar a {
+        float: left;
+    }
+    div.content {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .sidebar a {
+        text-align: center;
+        float: none;
+    }
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <title>
+        Current Itinerary
+    </title>
+    <link rel="stylesheet" href="/css/itinerary.css">
+    <h1 id="topTitle">Current Itinerary</h2>
+
+    </head>
+
+<div class="map">
+    <div id="log"></div>
+<div id="map">
+
+</div>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js"></script>-->
+<script type="module" src="map.js"></script>
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL_KeBXu1O-kwmxfZStwgcPMJF-mUrLxc&callback=initAutocomplete&libraries=places&v=weekly"
+    async>
+
+</script>
+    </div>
+
+    <body>
+    <main id="main-holder">
+
+        <div class="alert">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong>Note:</strong> All images must have EXIF data embedded.
+          </div>
+
+        <form id="current-itinerary" action="/createTrip" method="post" enctype="multipart/form-data">
+            <p id="journal" class="current-itinerary">Trip Title</p>
+            <input id="title-enter" type='text' name="title" value='Title' id="title-field" class="current-itinerary">
+
+
+            <!-- <input id="addPhotos" type='button' value='Add Photos' id = "photo" class="current-itinerary">-->
+            <!--      <input id="viewPhotos" type='button' value='View Trip Photos' class="current-itinerary">-->
+
+            <p id="journal" class="current-itinerary">Trip start</p>
+            <input type='date' name="date" value='dateStart' id="date-field" class="current-itinerary">
+            <p id="journal" class="current-itinerary">Trip end</p>
+            <input type='date' name="date" value='dateEnd' id="date-field" class="current-itinerary">
+            <p id="price" class="current-itinerary">Trip Price</p>
+            <input type='text' name="price" value='Add Price' id="price-field" class="current-itinerary">
+            <p id="journal" class="current-itinerary">Trip Description</p>
+            <textarea type='text' name="journal" id="journal-field" class="current-itinerary" rows="4"
+                cols="50"></textarea>
+                <p id="score" class="current-itinerary">Trip Tags e.g (Beach,Swimming)</p>
+                <input type='text' name="tags" value=' ' id="score-field" class="current-itinerary">
+
+            <div id="here">
+                <p id="events" class="current-itinerary">Day 1 Description</p>
+                <textarea type='text' name="event" id="event-field" class="current-itinerary" rows="2" cols="20"></textarea>
+
+
+                <input type="button" id="beforeThis" value="add new event log" class="bt">
+
+          </div>
+
+            <p id="trip" class="current-itinerary">Trip Photos (Currently limited to 7)
+            <div id="dropzone">
+                <h3>Drop Files or Click to Upload</h3>
+                <input type="file"  name="userPhoto" accept multiple onchange="previewFiles()">
+               <div id="preview"  src="" >
+        <script>
+         function previewFiles() {
+
+
+                var preview = document.querySelector('#preview');
+
+               var files = document.querySelector('input[type=file]').files;
+
+                function readAndPreview(file) {
+                   //
+                    // Make sure `file.name` matches our extensions criteria
+                    if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                        var reader = new FileReader();
+
+                        reader.addEventListener("load", function () {
+                            var image = new Image();
+                            image.height = 100;
+                            image.title = file.name;
+                            image.date=file.date;
+                            image.src = URL.createObjectURL(file);
+
+                            preview.appendChild(image);
+
+          }, false);
+
+                        reader.readAsDataURL(file);
+                    }
+
+                }
+
+                if (files) {
+                    [].forEach.call(files, readAndPreview);
+
+
+                }
+
+            }
+        </script>
+            </div>
+            <button type="submit" class="warrior">Upload Trip</button>
+
+            </p>
+        </form>
+
+    </main>
+
+    <script>
+        var iCnt = 1
+        $(document).ready(function () {
+            var container = $(document.createElement('div')).css({
+                borderTopColor: '#999', borderBottomColor: '#999',
+                borderLeftColor: '#999', borderRightColor: '#999'
+            });
+
+
+            $('#beforeThis').click(function () {
+                iCnt = iCnt + 1;
+                $(container).append('<p id="events'+iCnt+'" class="current-itinerary">Day ' + iCnt + ' Description </p>' +
+                    '<textarea  type=text id= "des'+iCnt+'" class="input" name="event"' + ' ' +
+                    +'rows = "2"' + ' ' + 'cols = "20"' + ' ></textarea>');
+                $('#here').after(container);
+
+            });
+
+            $('#remove').click(function() {
+                if (iCnt > 1) {
+                    $('#events' + iCnt).remove();
+                    $('#des' + iCnt).remove();
+                    iCnt = iCnt - 1;
+                }
+            });
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

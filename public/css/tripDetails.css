@@ -1,0 +1,146 @@
+ol,
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.table-photos {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-photos td,
+#table-photos th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table-photos th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+#table-photoss tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#table-photos tr:hover {
+    background-color: #ddd;
+}
+
+#horizontal-bar {
+    margin: 10px;
+    height: 55px;
+    width: 120%;
+    margin-top: -8px;
+    margin-left: -10px;
+    font-family: sans-serif;
+}
+
+#horizontal-bar li {
+    display: inline;
+    width: 100px;
+    float: left;
+    margin-left: 20px;
+    border-radius: 2px;
+    align-items: center;
+    text-align: center;
+}
+
+#horizontal-bar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#horizontal-bar a:hover {
+    background-color: #111;
+    color: #fff;
+}
+
+.sidebar-nav {
+    overflow: scroll;
+    height: 100%;
+    width: 190%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: darkseagreen;
+    margin-top: 55px;
+    padding-top: 20px;
+}
+
+.sidebar-nav a {
+    overflow: scroll;
+    padding: 6px 6px 6px 6px;
+    margin-top: 30px;
+    text-decoration: none;
+    font-size: 20px;
+    color: beige;
+    display: block;
+}
+
+.main-body {
+    padding-left: 50px;
+    Width: 300px;
+}
+
+.like_button {
+    position: static;
+    top: 11.5%;
+    left: 48%;
+}
+
+
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+
+.column {
+    float: left;
+    width: 10%;
+    padding: 5px;
+}
+
+
+/* Clear floats after image containers */
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#comment_form textarea {
+    margin-bottom: 10px;
+    display: block;
+    width: 20%;
+    height: 30%;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    line-height: 1.4em;
+}
+
+#map {
+    position: absolute;
+    width: 40%;
+    height: 600px;
+    margin-top: 5%;
+    background-color: #CCC;
+    margin-left: 30%;
+}
+
+;

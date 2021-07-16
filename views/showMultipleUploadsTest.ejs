@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+  <% if (uplaods.length == 0 ){ %>
+    <div class="sidebar-nav" style="width:20%;right:0">
+      <h3>Nothing</h3>
+
+  </div>
+
+    <% }else{ %>
+
+  <table style="width:70%">
+    <tr>
+      <th>Picture</th>
+    </tr>
+
+    <% for (i=0; i<uploads.length;i++){ %>
+    <tr>
+        <tr>
+     <td><img id = 'image' src= "http://localhost:3000/uploads/trips/<%=uplaods[i].photo_name%>" alt= "image should be here" width="150"></td>
+
+      <% } %>
+<% } %>
+
+  </table>
+
+
+
+</body>
+
+</html>

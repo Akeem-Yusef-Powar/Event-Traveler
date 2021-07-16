@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+<!--    <link rel="stylesheet" href="styleLoginPage.css">-->
+    <title>Event Traveler: Saved Trips</title>
+    <link rel="shortcut icon" type="image/jpg" href="/uploads/savedTripsPageIcons/favicon.png"/>
+    <link rel="stylesheet" href="/css/clickSort.css">
+    <link rel="stylesheet" href="/css/navBarStyle.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+    <!--<link rel="stylesheet" href="./style.css">-->
+</head>
+
+<body style="background-color: #d9dddd;">
+
+  <nav>
+    <ul id="horizontal-bar">
+      <li> <img src="/uploads/savedTripsPageIcons/Logo.png" width="40px" height="40px"></li>
+      <li> <a class="active" href="home">Home</a></li>
+      <li><a href="#About Event Traveler">             </a></li>
+      <li> <a href="search-trips">Search Trips</a></li>
+      <li><a href="#About Event Traveler">             </a></li>
+      <li><a href="search">Search Friends</a></li>
+      <li><a href="#About Event Traveler">             </a></li>
+    </ul>
+  </nav>
+
+  <body>
+
+    <% if (tripData.length==0 ){ %>
+      <div class="sidebar-nav" style="width:100%;right:0">
+        <h3>Nothing to Display</h3>
+        <a href="default">No trip data to </a>
+      </div>
+      <% }else{ %>
+        <table style="width:60%">
+          <tr>
+            <th>Picture</th>
+            <th>Location</th>
+            <th>Owner</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Score</th>
+            <th>Price</th>
+            <th>journal Entries</th>
+            <th>Event discriptions</th>
+
+          </tr>
+          <% for (i=0; i<tripData.length;i++){ %>
+            <tr>
+            <tr>
+              <td><img id='image' src="/uploads/trips/<%=tripData[i].trip_pic%>"
+                  alt="image should be here" width="150"></td>
+              <td>
+                <%=tripData[i].trip_title%>
+              </td>
+              <td>
+                <%=tripData[i].username%>
+              </td>
+              <td>
+                <%=tripData[i].trip_start%>
+              </td>
+              <td>
+                <%=tripData[i].trip_end%>
+              </td>
+              <td>
+                <%=tripData[i].trip_score%>
+              </td>
+              <td>$<%=tripData[i].trip_price%>
+              </td>
+              <td>
+                <%=tripData[i].trip_journals%>
+              </td>
+              <td>
+                <%=tripData[i].trip_events%>
+              </td>
+<form action="/trip-details" method="post">
+                <td><button type="submit" name="click" value="<%=tripData[i].tripID%>">View Details</button></td>
+              </form>
+              <% } %>
+                <% } %>
+
+        </table>
+
+
+
+        <script src="/js/MakeClickSortTable.js"></script>
+        <script src="/js/SortableTableUtils.js"></script>
+        <script src="/js/savedTrips.js"></script>
+        <script>
+          document.getElementById("content").innerHTML = "";
+          var ele = savedTrips(tripData);
+          document.getElementById("content").appendChild(ele);
+        </script>
+  </body>
+
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" href="/css/tripDetails.css">
+<script src="script.js"></script>
+
+<div class="map">
+    <div id="log"></div>
+    <div id="map">
+    </div>
+    <!--<script src="https://maps.googleapis.com/maps/api/js"></script>-->
+    <script type="module" src="mapdata.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL_KeBXu1O-kwmxfZStwgcPMJF-mUrLxc&callback=initAutocomplete&libraries=places&v=weekly" async>
+    </script>
+</div>
+
+<title>
+    Trip Itinerary | Event Traveler
+</title>
+
+<nav>
+    <ul id="horizontal-bar">
+        <li> <img src="https://i.ibb.co/qDHH5bB/Logo.png" width="30px" height="30px"></li>
+        <li> <a class="active" href="home">Profile</a></li>
+
+        <li> <a href="search-trips">Search Trips</a></li>
+
+        <li><a href="search">Search Friends</a></li>
+
+        <li><a href="logout">Log out</a></li>
+    </ul>
+</nav>
+
+
+<!---need code for featured pic. Done main pictures changes if another is clicked -->
+<!---need code for like and save feature. Done, must be a user to post. needs formatting -->
+<!---need code for sidebar info about trip-->
+<!---need code for comment section at bottom. Done, comments now post and are displayed with date sorting option. needs formating -->
+
+<div class="main-body">
+    <div class="trip-name-and-heading">
+
+        <h1>
+            <%=tripData[0].trip_title%>
+        </h1>
+
+    </div>
+
+    <div class="journal">
+        <p>Trip Overview:
+            <%=tripData[0].trip_journals%>
+        </p>
+    </div>
+
+
+    <form action="/like_trip" method="post" id="like_Trip">
+        <div class="like_button">
+            <input type="hidden" name="tripID" value=< %=tripData[0].tripID%> id="comment_post_ID" />
+            <button type="submit" class="warrior">Like</button>
+        </div>
+    </form>
+
+    <form action="/save_trip" method="post" id="save_Trip">
+        <input type="hidden" name="tripID" value=< %=tripData[0].tripID%> id="comment_post_ID" />
+        <div class="save_button">
+            <button type="submit" class="warrior">Save</button>
+        </div>
+    </form>
+
+    <div class="error">
+        <p>
+            <%= noUserError %>
+        </p>
+        <!-- Displays error when a none user trys to like/save -->
+    </div>
+
+</div>
+
+<div class="main-pic">
+    <img id="focus" src="/uploads/trips/<%=tripData[0].trip_pic%>" width="300">
+</div>
+
+</div>
+
+<div class="row">
+    <% for (i=0; i<photo.length;i++){ %>
+
+        <% if (i%3 == 0 ){ %>
+            <div class="row"></div>
+            <%}%>
+
+                <% if (i < photo.length ){ %>
+                    <% if (i%3 == 0 ){ %>
+                        <div class="row"></div>
+                        <%}%>
+                            <div class=" column">
+                                <img src="/uploads/trips/<%=photo[i].photo_name%>" id="pic" class="all" width="100" onclick="document.getElementById('focus').src = '/uploads/trips/<%=photo[i].photo_name%>'">
+                            </div>
+                            <% } %>
+                                <% } %>
+</div>
+<script>
+    var list = document.getElementsByClassName("all");
+    for (var i = 0; i < list.length; i++) {
+        list[i].id = "pic" + (i + 1);
+    }
+</script>
+
+<table id="table-photos" style="width:300Px; border: 1px black ;">
+    <tr>
+        <th>Trip day by day</th>
+    </tr>
+    <% for (i=0; i<eventData.length;i++){ %>
+        <tr>
+            <% if (i < eventData.length ){ %>
+                <td>
+                    <%=eventData[i].description%>
+                </td>
+                <% } else { %>
+                    <td> </td>
+                    <% } %>
+        </tr>
+        <% } %>
+
+</table>
+
+
+<div id="comment_form">
+    <h3>Leave a comment on this trip!</h3>
+    <form action="/post_comment" method="post" id="commentform">
+        <textarea name="comment" id="comment" rows="10" tabindex="4" required="required" placeholder="Enter your comment here..."></textarea>
+        </textarea>
+        <input type="hidden" name="tripID" value=< %=tripData[0].tripID%> id="comment_post_ID" />
+        <button type="post">
+            Post
+            </button>
+    </form>
+
+    <div class="error">
+        <p>
+            <%= errorMessage %>
+        </p>
+        <!-- Displays error when a none user trys to make comment -->
+    </div>
+</div>
+
+<h3>Comments</h3>
+
+<form action="/sortComment" method="post" id="sortComment">
+    <input type="hidden" name="tripID" value=< %=tripData[0].tripID%> id="comment_post_ID" />
+    <select name="sortComment" id="sortComment" class="saved_trips">
+    <option value="default">Most Recent</option>
+    <option value="old">Oldest</option>
+</select>
+    <button type="submit" class="warrior">order</button>
+</form>
+
+<% if (commentData.length == 0 ){ %>
+    <div class="journal">
+        <p>Be the first to comment</p>
+    </div>
+    <% } else { %>
+
+        <% for (i=0; i<commentData.length;i++){ %>
+
+            <div class="commentTable">
+                <!-- needs css styling to look nice -->
+                <hr>
+                <!-- horizontal divider-->
+                <p> User:
+                    <%=commentData[i].username%>
+                        <%=commentData[i].time%>
+                </p>
+                <p> Said:
+                    <%=commentData[i].comment%>
+                </p>
+
+            </div>
+
+            <% } %>
+                <hr>
+                <% } %>
+
+
+
+                    <div class="sidebar-nav" style="width:28%;right:0">
+                        <h3>TRIP INFORMATION</h3>
+
+                        <form Action="/editFromDetailsPage" method="post">
+                            <button type="submit" name="click" value="<%=tripData[0].tripID%>">Edit</button>
+                        </form>
+
+                        <a>Trip Duration: <%=tripData[0].trip_start%> - <%=tripData[0].trip_end%></a>
+                        <a>Places visited: <%=tripData[0].trip_highlights%></a>
+                        <a>Activities: <%=tripData[0].trip_tags%></a>
+                        <a>Estimated pricing: $<%=tripData[0].trip_price%></a>
+                    </div>

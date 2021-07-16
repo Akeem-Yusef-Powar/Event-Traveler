@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Event Traveler: Profile
+    </title>
+    <link rel="stylesheet" href="/css/userProfile.css">
+    <link rel="shortcut icon" type="image/jpg" href="/uploads/savedTripsPageIcons/favicon.png" />
+    <link rel="stylesheet" href="/css/clickSort.css">
+    <link rel="stylesheet" href="/css/navBarStyle.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+</head>
+
+<body style="background-color: #d9dddd;">
+    <nav>
+        <ul id="horizontal-bar">
+            <li> <img src="/uploads/savedTripsPageIcons/Logo.png" width="40px" height="40px"></li>
+            <li> <a class="active" href="home">Home</a></li>
+            
+            <li> <a href="search-trips">Search Trips</a></li>
+            
+            <li><a href="search">Search Friends</a></li>
+           
+            <li><a href="logout">Log out</a></li>
+        </ul>
+    </nav>
+
+
+
+
+    <div class="profile-info" >
+       <form action="/friendsProfile" method="post" enctype="multipart/form-data">
+       <input name="friendsName" type="hidden">
+        <div class="profile-pic">
+            <img id='image' src="/uploads/images/<%=data[0].profilepic%>" alt="pic should be here"
+                class="profile-picture" width="150">
+        </div>
+
+
+       
+
+        <div class="name">
+            <p>Name: <%= data[0].firstname %>
+                    <%= data[0].lastname %>
+
+        </div>
+        <div class="username">
+            <p>Username: <%= data[0].username %>
+            </p>
+        </div>
+
+        <div class="bio">
+            <p>
+                <%= data[0].bio %>
+            </p>
+
+
+
+           
+        </div>
+    </div>
+    </div>
+    
+
+
+
+
+
+    
+
+   
+
+    <div class="saved-trips" style="width:30%">
+        <h4>Saved Trips</h4>
+        <% if (trip.length==0 ){ %>
+            <p href="default">No saved Trips</p>
+            <% }else{ %>
+                <% for (i=0; i<trip.length;i++){ %>
+                    <li href=>
+                        <%=trip[i].trip_title%> <img id='image'
+                                src="/uploads/trips/<%=trip[i].trip_pic%>" alt="pic should be here"
+                                class="profile-picture" width="150">
+                    </li>
+                    <% } %>
+                        <% } %>
+
+                            
+
+    </div>
+
+    <div class="my-trips" style="width:30%;">
+        <h4>Friends Trips</h4>
+        <% if (myTrip.length==0 ){ %>
+            <a href="#" class="click">No created Trips</a>
+            <% }else{ %>
+                <% for (i=0; i<myTrip.length;i++){ %>
+             
+                   
+                        <%=myTrip[i].trip_title%> <img id='image'
+                                src="/uploads/trips/<%=myTrip[i].trip_pic%>"
+                                alt="pic should be here" class="profile-picture" width="150">
+                    </a>
+                    <% } %>
+                        <% } %>
+
+    </div>
+</form>
+    <script>
+        $(document).ready(function () {
+
+            $('.click').on("click", function (e) {
+                e.preventDefault(); // cancel the default a tag event.
+
+                $.get("edit.html", function (data) {
+                    $(".result").html(data);
+                });
+
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+body {
+    background-color: darkseagreen;
+    display: grid;
+}
+
+h1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h2 {
+    margin-top: 10px;
+}
+
+#main-holder {
+    width: 30%;
+    height: 90%;
+    background-color: white;
+    border-style: groove;
+    display: grid;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+#addEvent {
+    margin-bottom: 50px;
+}

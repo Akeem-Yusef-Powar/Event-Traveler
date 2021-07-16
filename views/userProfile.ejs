@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<nav>
+    <ul id="horizontal-bar">
+        <li> <img src="/uploads/savedTripsPageIcons/Logo.png" width="40px" height="40px"></li>
+        <li> <a class="active" href="home">Profile</a></li>
+
+        <li> <a href="search-trips">Search Trips</a></li>
+
+        <li><a href="search">Search Friends</a></li>
+
+        <li><a href="logout">Log out</a></li>
+    </ul>
+</nav>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Event Traveler: Profile
+    </title>
+    <link rel="stylesheet" href="/css/userProfile.css">
+    <link rel="shortcut icon" type="image/jpg" href="/uploads/savedTripsPageIcons/favicon.png" />
+    <link rel="stylesheet" href="/css/clickSort.css">
+    <link rel="stylesheet" href="/css/navBarStyle.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+</head>
+
+
+
+
+
+<body style="background-color: #d9dddd;">
+
+    <div class="profile-info">
+        <div class="profile-pic">
+            <img id='image' src="/uploads/images/<%=data[0].profilepic%>" alt="pic should be here" class="profile-picture" width="150">
+        </div>
+
+
+        <form id="editUserPhoto" action="/userPhotoUpload" method="post" enctype="multipart/form-data">
+            <input type="file" accept="" name="photo" class="warrior">
+            <button type="submit" class="warrior">upload Photo</button>
+        </form>
+
+        <div class="name">
+            <p>Name:
+                <%= data[0].firstname %>
+                    <%= data[0].lastname %>
+
+        </div>
+        <div class="username">
+            <p>Username:
+                <%= data[0].username %>
+            </p>
+        </div>
+
+        <div class="bio">
+            <p>
+                <%= data[0].bio %>
+            </p>
+
+
+
+            <form id="bio" action="/editUserBio" method="post" enctype="multipart/form-data">
+                <input type="text" name="bio" id="bio" class="tank" placeholder="edit bio">
+                <button type="submit" class="tank">edit bio</button>
+            </form>
+        </div>
+    </div>
+    </div>
+    <div class="sidebar-nav" style="width:20%;right:0">
+        <div>
+            <h3>Friends</h3>
+            <form action="/getFriendsList" method="post" enctype="multipart/form-data">
+
+
+            </form>
+            <% if (friends1.length==0) {%>
+
+                <a href="search">No Friend Request</a></li>
+
+                <%}%>
+                    <% for ( i=0; i<friends1.length;i++){ %>
+                        <% var length =friends1.length%>
+                            <% if (friends1[i].friend_one!=data[0].username ){ %>
+                                <a></a>
+                                <% }else if (friends1.length==0 ){ %>
+                                    <p>No friends Yet</p>
+                                    <% }else{ %>
+
+                                        <input type="hidden" name="friendsName" value="<%= friends1[i].friend_one %>">
+                                        <form action="/friendsProfile" method="post">
+                                            <p>
+                                                <%= friends1[i].friend_two %>
+                                            </p>
+                                            <button type="submit" name="friendsName" class="tank" value="<%= friends1[i].friend_two %>">View Profile</button>
+                                        </form>
+
+
+                                        <form action="/removeFriends" method="post" enctype="multipart/form-data">
+
+
+                                            <input type="hidden" name="friend_one" value="<%= friends1[i].friend_one %>">
+                                            <input type="hidden" name="friend_two" value="<%= friends1[i].friend_two %>">
+                                            <button type="submit" class="tank">Remove </button>
+                                        </form>
+
+
+                                        <% } %>
+
+                                            <% } %>
+
+                                                </form>
+
+        </div>
+        <div>
+            <form action="/getRecRequests" method="post" enctype="multipart/form-data">
+                <h3>Friend Requests</h3>
+
+            </form>
+            <% if (recReq1.length==0) {%>
+
+                <a href="search">No Friend Request</a></li>
+
+                <%}%>
+                    <% for ( i=0; i<recReq1.length;i++){ %>
+
+
+                        <form action="/addFriends" method="post" enctype="multipart/form-data">
+
+                            <%= recReq1[i].friend_one %>
+                                <input type="hidden" name="friend_two" value="<%= recReq1[i].friend_one %>">
+                                <input type="hidden" name="friend_one" value="<%= recReq1[i].friend_two %>">
+                                <button type="submit" class="tank">ACCEPT</button>
+
+
+                        </form>
+                        <form action="/removeFriends" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="friend_two" value="<%= recReq1[i].friend_two %>">
+                            <input type="hidden" name="friend_one" value="<%= recReq1[i].friend_one %>">
+                            <button type="submit" id="demo" class="tank">Reject</button>
+
+                        </form>
+                        </form>
+                        <% } %>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="current-itinerary">
+
+        <div class="itinerary-items">
+            <div class="itinerary">
+                <a href="itinerary">Current Itinerary</a>
+            </div>
+
+            <div class="trip-name">
+                Trip Name
+            </div>
+            <div class="edit-name">
+                <a href="edit">Edit Trip</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="savedmy-trips">
+        <div class="saved-trips" style="width:30%">
+            <h4>Saved Trips</h4>
+            <% if (trip.length == 0 ){ %>
+                <p href="default">No saved Trips</p>
+                <% }else{ %>
+                    <% for (i=0; i<trip.length;i++){ %>
+                        <li href=>
+                            <%=trip[i].trip_title%> <img id='image' src="/uploads/trips/<%=trip[i].trip_pic%>" alt="pic should be here" class="profile-picture" width="150"></li>
+                        <% } %>
+                            <% } %>
+
+                                <form id="savedTripsPage" action="/savedTripsPage" method="post" enctype="multipart/form-data">
+                                    <button type="submit" class="mage">Saved trips list</button>
+                                </form>
+
+        </div>
+    </div>
+
+    <div class="my-trips" style="width:30%;">
+        <h4>My Trips</h4>
+        <% if (myTrip.length == 0 ){ %>
+            <a href="#" class="click">No created Trips</a>
+            <% }else{ %>
+                <% for (i=0; i<myTrip.length;i++){ %>
+                    <a class="click">
+                        <%=myTrip[i].trip_title%> <img id='image' src="/uploads/trips/<%=myTrip[i].trip_pic%>" alt="pic should be here" class="profile-picture" width="150"></a>
+                    <% } %>
+                        <% } %>
+
+    </div>
+    <script>
+        $(document).ready(function() {
+
+            $('.click').on("click", function(e) {
+                e.preventDefault(); // cancel the default a tag event.
+
+                $.get("edit.html", function(data) {
+                    $(".result").html(data);
+                });
+
+            });
+        });
+    </script>
+</body>
+
+</html>

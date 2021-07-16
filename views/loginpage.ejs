@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Event Traveler: Login
+    </title>
+    <link href="/css/styleLoginPage.css" rel="stylesheet">
+    <script defer src="scriptLoginPage.js">
+    </script>
+
+</head>
+
+
+<div class="sidebar">
+    <ul>
+        <li> <img src="https://i.ibb.co/qDHH5bB/Logo.png" width="30px" height="30px"></li>
+        <li> <a class="active" href="#home">Home</a></li>
+
+        <li><a href="search-trips">Explore</a></li>
+    </ul>
+
+</div>
+
+
+
+<body>
+
+    <h1 id="topTitle">Event Traveler</h1>
+    <h2 id="login-header">Login</h2>
+    <hr>
+
+
+
+    <main id="main-holder">
+        <form id="login-form" action="/loginForm" method="post">
+
+            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
+            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
+            <input type="submit" value="Log In" id="login-form-submit">
+
+            <div class="links">
+                <a href="register">Register</a>
+
+        </form>
+    </main>
+
+    <div class="error">
+        <p>
+            <%= errorMessage %>
+        </p>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <style>
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+       Edit Trip
+    </title>
+    <link rel="stylesheet" href="/css/editTrip.css">
+    <script src="script.js">
+    </script>
+    <h1 id="topTitle">Edit Your Itinerary</h2>
+
+
+
+</head>
+<div class="map">
+
+    <div id="log"></div>
+    <div id="map">
+
+    </div>
+<h2 id="mapTitle">New Trip in map ↑</h2>
+    <!--<script src="https://maps.googleapis.com/maps/api/js"></script>-->
+    <script type="module" src="map.js"></script>
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL_KeBXu1O-kwmxfZStwgcPMJF-mUrLxc&callback=initAutocomplete&libraries=places&v=weekly"
+        async>
+
+        </script>
+</div>
+<div class="maptouse">
+    <h2 id="mapTitle2">Old Trip in map↓</h2>
+    <div id="maptouse">
+    </div>
+    <!--<script src="https://maps.googleapis.com/maps/api/js"></script>-->
+    <script type="module" src="mapedit.js"></script>
+
+
+</div>
+<body>
+
+    <main id="main-holder">
+        <form id="edit-trip" action = "/editTrip" method = "post" enctype="multipart/form-data">
+            <input type="hidden" name="tripID" value= <%=tripData[0].tripID%> id="trip_ID" />
+            <p id="journal" class="edit-itinerary"> Edit the Fields You Want to Change</p>
+
+            <p id="journal" class="edit-itinerary">Trip Title</p>
+            <p name = "oldTitle" > Old title : <%=tripData[0].trip_title%> </p>
+            <input type="hidden" name="oldTripTitle" value= <%=tripData[0].trip_title%> id="old_trip_title" />
+                <input id= "title-enter" type='text' name = "newTitle" value= <%=tripData[0].trip_title%> id="title-field" class="edit-itinerary">
+
+                <p id="journal" class="edit-itinerary">Trip Start Date</p>
+                <p> Old date : <%=tripData[0].trip_start%></p>
+                <input type="hidden" name="oldTripStart" value= '<%=tripData[0].trip_start%>' id="old_trip_start" />
+                <input  type='date' name = "newStart" value= "" id="sdate-field" class="edit-itinerary">
+
+                <p id="journal" class="edit-itinerary">Trip End Date</p>
+                <p> Old date : <%=tripData[0].trip_end%></p>
+                <input type="hidden" name="oldTripEnd" value= '<%=tripData[0].trip_end%>' id="old_trip_end" />
+                <input  type='date' name = "newEnd" value= "" id="edate-field" class="edit-itinerary">
+
+                <p id="journal" class="edit-itinerary">price</p>
+                <input  type='text' name = "newPrice" value= <%=tripData[0].trip_price%> id="price-field" class="edit-itinerary">
+
+                <p id="journal" class="edit-itinerary">Trip Journals</p>
+                <input  type='text' name = "newJournal" value= "<%=tripData[0].trip_journals%>" id= "journak-field" class="edit-itinerary">
+
+                <p id="journal" class="edit-itinerary">Trip Tags</p>
+                <input  type='text' name = "newTags" value= "<%=tripData[0].trip_tags%>" id= "journal-field" class="edit-itinerary">
+                <!--  <input id="viewJournal" type='button' value='View Trip Journals' class="current-itinerary">-->
+
+                <div class = "row">
+                    <% for (i=0; i<photo.length;i++){ %>
+                        <% if (i < photo.length ){ %>
+                            <% if (i%3 == 0 ){ %>
+                                <div class = "row"></div>
+                                <%}%>
+                            <div class =" column"+i>
+
+                            <img id="tripPic"  name = "tripPic" class="all" src ="/uploads/trips/<%=photo[i].photo_name%>"  width = "100">
+
+                            </div>
+                            <% } %>
+                        <% } %>
+
+                </div>
+                <script>
+                    var list = document.getElementsByClassName("all");
+                    for (var i = 0; i < list.length; i++) {
+                        list[i].id = "tripPic" + (i + 1);
+                    }
+                </script>
+                <div id ="dropzone">
+                <p id="trip" class="current-itinerary" >Upload new set of photos * overwrites all existing photos</p>
+                <input type="file" name="tripPhotos" accept multiple onchange="previewFiles()">
+                <div id="preview"  src="" >
+                <script>
+                    function previewFiles() {
+
+
+                           var preview = document.querySelector('#preview');
+
+                          var files = document.querySelector('input[type=file]').files;
+
+                           function readAndPreview(file) {
+                              //
+                               // Make sure `file.name` matches our extensions criteria
+                               if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                                   var reader = new FileReader();
+
+                                   reader.addEventListener("load", function () {
+                                       var image = new Image();
+                                       image.height = 100;
+                                       image.title = file.name;
+                                       image.date=file.date;
+                                       image.src = URL.createObjectURL(file);
+
+                                       preview.appendChild(image);
+
+                     }, false);
+
+                                   reader.readAsDataURL(file);
+                               }
+
+                           }
+
+                           if (files) {
+                               [].forEach.call(files, readAndPreview);
+
+
+                           }
+
+                       }
+                   </script>
+                   </div>
+</div>
+
+                    <%if(eventData.length == 0){%>
+                        <h3>Add day by day description</h3>
+                        <div  id= "here">
+                            <p id="events" class="current-itinerary">Day 1 Description</p>
+                            <textarea type='text' name="event" id="des" class="current-itinerary" rows="2" cols="20"></textarea>
+                            <input type="button" id="beforeThis" value = "add another day description" class= "bt">
+                            <input type="button" id= "remove" value = "remove description" class= "bt">
+
+                        </div>
+                    <% } else{ %>
+                        <% for (i = 0; i < eventData.length; i++){ %>
+                            <p id="events" class="edit-itinerary">Day <%=i+1%> Events</p>
+                            <input type="hidden" name="eventID" value= <%=eventData[i].eventID%> id="event-ID-field" />
+                            <input  type='text' name = "event" value= "<%=eventData[i].description%>" id = "event-field" class="edit-itinerary">
+
+                                <%if(i == 0){%>
+                                    <!-- the day 1 events on edit page returns of values when trying to delete, removed button -->
+                                <%}else{%>
+                                    <!--Delete buton doesnt work as i can not nest forms and thats wht i was doing-->
+                                    <input type="hidden" name="deleteTripID" value= <%=tripData[0].tripID%> id="deleteTripID" />
+                                    <input type="hidden" name="deleteEventID" value= <%=eventData[i].eventID%> id="deleteEventID" />
+                                    <button type = "submit" name = "john">Delete</button>
+                                    <%}%>
+
+                            <!--  <input id="viewEvent" type='button' value='View Trips Events' class="current-itinerary">-->
+
+                            <% if(i == eventData.length-1){%>
+                                <div  id= "here">
+                                    <p id="events" class="current-itinerary">Day <%=i+2%> Description</p>
+                                    <textarea type='text' name="event" id="des" class="current-itinerary" rows="2" cols="20"></textarea>
+                                    <input type="button" id="beforeThis" value = "add another day description" class= "bt">
+                                    <input type="button" id= "remove" value = "remove added description" class= "bt">
+
+                                </div>
+                            <%}%>
+                    <% } %>
+                <% } %>
+
+                <input type="submit" value="submit!" id="submitEditForm">
+
+        </form>
+
+        <form action = "/cancelEditForm" method = "post">
+            <input type="submit" value="Cancel" id="cancelEditForm"></form>
+
+
+
+    </main>
+
+<!-- script to add and remove day description boxes dynamically 1 is always present -->
+<!-- underlined as error but works fine -->
+
+    <script>
+        var iCnt = <%= eventData.length%> +1;
+
+        $(document).ready(function(){
+            var container = $(document.createElement('div')).css({
+            borderTopColor: '#999', borderBottomColor: '#999',
+            borderLeftColor: '#999', borderRightColor: '#999'
+            });
+
+            $('#beforeThis').click(function(){
+                iCnt = iCnt +1;
+                $(container).append('<p id="events'+iCnt+'" class="current-itinerary">Day ' + iCnt +' Description </p>' +
+                '<textarea  type=text id= "des'+iCnt+'" class="input" name="event"'+ ' ' +
+                    +'rows = "2"'+ ' '+ 'cols = "20"' + ' ></textarea>');
+                    $('#here').after(container);
+            });
+
+            $('#remove').click(function() {
+                if (iCnt > 1) {
+                    $('#events' + iCnt).remove();
+                    $('#des' + iCnt).remove();
+                    iCnt = iCnt - 1;
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
